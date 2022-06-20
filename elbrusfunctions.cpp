@@ -267,15 +267,27 @@ int ElbrusMatrixMul(float *inp, float *wts, float *out, long Q, long L, long F) 
 
 int ElbrusMatrixMulParallel(float *inp, float *wts, float *out, long Q, long L, long F) {
     timespec start, end, tdiff;
-    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &start);
     omp_set_num_threads(16);
-    #pragma omp parallel for
-    {
-        for (long q = 0; q < Q; q += 6)
-            for (long f = 0; f < F; f += 8)
-                MulKernel48(inp + q * L, wts + f * L, out + f + q * F, L, F);
+    if (Q >= F) {
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &start);
+        #pragma omp parallel for
+        {
+            for (long q = 0; q < Q; q += 6)
+                for (long f = 0; f < F; f += 8)
+                    MulKernel48(inp + q * L, wts + f * L, out + f + q * F, L, F);
+        }
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
     }
-    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+    else {
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &start);
+        #pragma omp parallel for
+        {
+            for (long f = 0; f < F; f += 8)
+                for (long q = 0; q < Q; q += 6)
+                    MulKernel48(inp + q * L, wts + f * L, out + f + q * F, L, F);
+        }
+        clock_gettime(CLOCK_THREAD_CPUTIME_ID, &end);
+    }
     tdiff = diff(start, end);
     double t_real = static_cast<double>(tdiff.tv_sec) + static_cast<double>(tdiff.tv_nsec) / 1.0e9,
            t_ideal = (Q * L * F) / (24 * 1.5 * 1.0e9);
