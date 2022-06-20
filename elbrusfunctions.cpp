@@ -461,61 +461,65 @@ void MulKernel48Relu(float *inp, float *wts, float *bias, float *out, int L, int
            partsum51, partsum52, partsum53, partsum54, partsum55, partsum56, partsum57, partsum58,
            partsum61, partsum62, partsum63, partsum64, partsum65, partsum66, partsum67, partsum68,
 
-           bias1, bias2;
+           bias1, bias2,
+           
+           zerosreg;
 
-    partsum11 = zeros;
-    partsum12 = partsum11;
-    partsum13 = partsum11;
-    partsum14 = partsum11;
-    partsum15 = partsum11;
-    partsum16 = partsum11;
-    partsum17 = partsum11;
-    partsum18 = partsum11;
+    zerosreg = zeros;
 
-    partsum21 = partsum11;
-    partsum22 = partsum11;
-    partsum23 = partsum11;
-    partsum24 = partsum11;
-    partsum25 = partsum11;
-    partsum26 = partsum11;
-    partsum27 = partsum11;
-    partsum28 = partsum11;
+    partsum11 = zerosreg;
+    partsum12 = zerosreg;
+    partsum13 = zerosreg;
+    partsum14 = zerosreg;
+    partsum15 = zerosreg;
+    partsum16 = zerosreg;
+    partsum17 = zerosreg;
+    partsum18 = zerosreg;
 
-    partsum31 = partsum11;
-    partsum32 = partsum11;
-    partsum33 = partsum11;
-    partsum34 = partsum11;
-    partsum35 = partsum11;
-    partsum36 = partsum11;
-    partsum37 = partsum11;
-    partsum38 = partsum11;
+    partsum21 = zerosreg;
+    partsum22 = zerosreg;
+    partsum23 = zerosreg;
+    partsum24 = zerosreg;
+    partsum25 = zerosreg;
+    partsum26 = zerosreg;
+    partsum27 = zerosreg;
+    partsum28 = zerosreg;
 
-    partsum41 = partsum11;
-    partsum42 = partsum11;
-    partsum43 = partsum11;
-    partsum44 = partsum11;
-    partsum45 = partsum11;
-    partsum46 = partsum11;
-    partsum47 = partsum11;
-    partsum48 = partsum11;
+    partsum31 = zerosreg;
+    partsum32 = zerosreg;
+    partsum33 = zerosreg;
+    partsum34 = zerosreg;
+    partsum35 = zerosreg;
+    partsum36 = zerosreg;
+    partsum37 = zerosreg;
+    partsum38 = zerosreg;
 
-    partsum51 = partsum11;
-    partsum52 = partsum11;
-    partsum53 = partsum11;
-    partsum54 = partsum11;
-    partsum55 = partsum11;
-    partsum56 = partsum11;
-    partsum57 = partsum11;
-    partsum58 = partsum11;
+    partsum41 = zerosreg;
+    partsum42 = zerosreg;
+    partsum43 = zerosreg;
+    partsum44 = zerosreg;
+    partsum45 = zerosreg;
+    partsum46 = zerosreg;
+    partsum47 = zerosreg;
+    partsum48 = zerosreg;
 
-    partsum61 = partsum11;
-    partsum62 = partsum11;
-    partsum63 = partsum11;
-    partsum64 = partsum11;
-    partsum65 = partsum11;
-    partsum66 = partsum11;
-    partsum67 = partsum11;
-    partsum68 = partsum11;
+    partsum51 = zerosreg;
+    partsum52 = zerosreg;
+    partsum53 = zerosreg;
+    partsum54 = zerosreg;
+    partsum55 = zerosreg;
+    partsum56 = zerosreg;
+    partsum57 = zerosreg;
+    partsum58 = zerosreg;
+
+    partsum61 = zerosreg;
+    partsum62 = zerosreg;
+    partsum63 = zerosreg;
+    partsum64 = zerosreg;
+    partsum65 = zerosreg;
+    partsum66 = zerosreg;
+    partsum67 = zerosreg;
+    partsum68 = zerosreg;
 
     for (long l = 0; l < L; l += 4) {
         vinp1 = addr(inp + l        );
@@ -592,23 +596,23 @@ void MulKernel48Relu(float *inp, float *wts, float *bias, float *out, int L, int
     bias1 = addr(bias    );
     bias2 = addr(bias + 4);
 
-    sum11 = relu(hadds4bias(partsum11, partsum12, partsum13, partsum14, bias1));
-    sum12 = relu(hadds4bias(partsum15, partsum16, partsum17, partsum18, bias2));
+    sum11 = relu(zerosreg, hadds4bias(partsum11, partsum12, partsum13, partsum14, bias1));
+    sum12 = relu(zerosreg, hadds4bias(partsum15, partsum16, partsum17, partsum18, bias2));
 
-    sum21 = relu(hadds4bias(partsum21, partsum22, partsum23, partsum24, bias1));
-    sum22 = relu(hadds4bias(partsum25, partsum26, partsum27, partsum28, bias2));
+    sum21 = relu(zerosreg, hadds4bias(partsum21, partsum22, partsum23, partsum24, bias1));
+    sum22 = relu(zerosreg, hadds4bias(partsum25, partsum26, partsum27, partsum28, bias2));
 
-    sum31 = relu(hadds4bias(partsum31, partsum32, partsum33, partsum34, bias1));
-    sum32 = relu(hadds4bias(partsum35, partsum36, partsum37, partsum38, bias2));
+    sum31 = relu(zerosreg, hadds4bias(partsum31, partsum32, partsum33, partsum34, bias1));
+    sum32 = relu(zerosreg, hadds4bias(partsum35, partsum36, partsum37, partsum38, bias2));
 
-    sum41 = relu(hadds4bias(partsum41, partsum42, partsum43, partsum44, bias1));
-    sum42 = relu(hadds4bias(partsum45, partsum46, partsum47, partsum48, bias2));
+    sum41 = relu(zerosreg, hadds4bias(partsum41, partsum42, partsum43, partsum44, bias1));
+    sum42 = relu(zerosreg, hadds4bias(partsum45, partsum46, partsum47, partsum48, bias2));
 
-    sum51 = relu(hadds4bias(partsum51, partsum52, partsum53, partsum54, bias1));
-    sum52 = relu(hadds4bias(partsum55, partsum56, partsum57, partsum58, bias2));
+    sum51 = relu(zerosreg, hadds4bias(partsum51, partsum52, partsum53, partsum54, bias1));
+    sum52 = relu(zerosreg, hadds4bias(partsum55, partsum56, partsum57, partsum58, bias2));
 
-    sum61 = relu(hadds4bias(partsum61, partsum62, partsum63, partsum64, bias1));
-    sum62 = relu(hadds4bias(partsum65, partsum66, partsum67, partsum68, bias2));
+    sum61 = relu(zerosreg, hadds4bias(partsum61, partsum62, partsum63, partsum64, bias1));
+    sum62 = relu(zerosreg, hadds4bias(partsum65, partsum66, partsum67, partsum68, bias2));
 
     addr(out            ) = sum11;
     addr(out         + 4) = sum12;

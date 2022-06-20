@@ -16,6 +16,6 @@
 #define muladds(a, b, c)            adds(muls(a, b), c)
 #define hadds4(a, b, c, d)          hadds(hadds(a, b), hadds(c, d))
 #define hadds4bias(a, b, c, d, e)   adds(hadds4(a, b, c, d), e)
-#define relu(x)                     maxs(zeros, x)
+#define relu(x, y)                  maxs(x, y)
 
 #endif
