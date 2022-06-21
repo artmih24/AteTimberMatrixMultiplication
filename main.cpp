@@ -36,6 +36,7 @@ int main(int argc, char* argv[]) {
     //MatrixPrintV2(inp, QL, L);
     //MatrixPrintV2(wts, LF, F);
     //MatrixMul(inp, wts, out, Q, L, F);
+
     for (int i = 0; i < Q; i++) {
         for (int j = 0; j < L; j++) {
             for (int k = 0; k < F; k++) {
@@ -53,6 +54,7 @@ int main(int argc, char* argv[]) {
             out2[k + i * F] = out2[k + i * F] >= 0 ? out2[k + i * F] : 0;
         }
     }
+
     //MatrixPrintV2(inp, QL, L);
     //MatrixPrintV2(wts, LF, F);
     //ElbrusMatrixMulParallel(inp, wts, out3, Q, L, F);
@@ -60,7 +62,7 @@ int main(int argc, char* argv[]) {
     ElbrusMatrixMulRelu(inp, wts, bias, out, Q, L, F);
     //MatrixPrintV2(out3, QF, F);
     //MatrixPrintV2(out4, QF, F);
-    
+
     //MatrixPrintV2(out2, QF, F);
     //MatrixPrintV2(out, QF, F);
     PrintDiff(out, out2, QF, F);

@@ -596,23 +596,23 @@ void MulKernel48Relu(float *inp, float *wts, float *bias, float *out, int L, int
     bias1 = addr(bias    );
     bias2 = addr(bias + 4);
 
-    sum11 = relu(zerosreg, hadds4bias(partsum11, partsum12, partsum13, partsum14, bias1));
-    sum12 = relu(zerosreg, hadds4bias(partsum15, partsum16, partsum17, partsum18, bias2));
+    sum11 = relu(hadds4bias(partsum11, partsum12, partsum13, partsum14, bias1));
+    sum12 = relu(hadds4bias(partsum15, partsum16, partsum17, partsum18, bias2));
 
-    sum21 = relu(zerosreg, hadds4bias(partsum21, partsum22, partsum23, partsum24, bias1));
-    sum22 = relu(zerosreg, hadds4bias(partsum25, partsum26, partsum27, partsum28, bias2));
+    sum21 = relu(hadds4bias(partsum21, partsum22, partsum23, partsum24, bias1));
+    sum22 = relu(hadds4bias(partsum25, partsum26, partsum27, partsum28, bias2));
 
-    sum31 = relu(zerosreg, hadds4bias(partsum31, partsum32, partsum33, partsum34, bias1));
-    sum32 = relu(zerosreg, hadds4bias(partsum35, partsum36, partsum37, partsum38, bias2));
+    sum31 = relu(hadds4bias(partsum31, partsum32, partsum33, partsum34, bias1));
+    sum32 = relu(hadds4bias(partsum35, partsum36, partsum37, partsum38, bias2));
 
-    sum41 = relu(zerosreg, hadds4bias(partsum41, partsum42, partsum43, partsum44, bias1));
-    sum42 = relu(zerosreg, hadds4bias(partsum45, partsum46, partsum47, partsum48, bias2));
+    sum41 = relu(hadds4bias(partsum41, partsum42, partsum43, partsum44, bias1));
+    sum42 = relu(hadds4bias(partsum45, partsum46, partsum47, partsum48, bias2));
 
-    sum51 = relu(zerosreg, hadds4bias(partsum51, partsum52, partsum53, partsum54, bias1));
-    sum52 = relu(zerosreg, hadds4bias(partsum55, partsum56, partsum57, partsum58, bias2));
+    sum51 = relu(hadds4bias(partsum51, partsum52, partsum53, partsum54, bias1));
+    sum52 = relu(hadds4bias(partsum55, partsum56, partsum57, partsum58, bias2));
 
-    sum61 = relu(zerosreg, hadds4bias(partsum61, partsum62, partsum63, partsum64, bias1));
-    sum62 = relu(zerosreg, hadds4bias(partsum65, partsum66, partsum67, partsum68, bias2));
+    sum61 = relu(hadds4bias(partsum61, partsum62, partsum63, partsum64, bias1));
+    sum62 = relu(hadds4bias(partsum65, partsum66, partsum67, partsum68, bias2));
 
     addr(out            ) = sum11;
     addr(out         + 4) = sum12;
